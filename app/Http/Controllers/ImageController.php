@@ -27,6 +27,7 @@ class ImageController extends Controller
 
     public function store(ImageRequest $request)
     {
-        dd($request->all());
+        Image::create($request->getData());
+        return to_route('images.index')->with('message', "Image has been uploaded successfully");
     }
 }
