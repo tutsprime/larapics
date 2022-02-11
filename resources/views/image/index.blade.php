@@ -2,7 +2,7 @@
 
 @foreach ($images as $image)
     <div>
-        <a href="">
+        <a href="{{ $image->permalink() }}">
             <img src="{{ $image->fileUrl() }}" alt="{{ $image->title }}" width="300">
         </a>
     </div>

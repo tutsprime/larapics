@@ -32,4 +32,9 @@ class Image extends Model
     {
         return Storage::url($this->file);
     }
+
+    public function permalink()
+    {
+        return route("images.show", $this->slug);
+    }
 }
