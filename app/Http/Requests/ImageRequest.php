@@ -24,6 +24,11 @@ class ImageRequest extends FormRequest
      */
     public function rules()
     {
+        if ($this->method() == 'PUT') {
+            return [
+                'title' => 'required'
+            ];
+        }
         return [
             'file' => 'required|image',
             'title' => 'nullable'
