@@ -8,6 +8,8 @@ class Alert extends Component
 {
     public $type;
 
+    public $dismissible;
+
     protected $types = [
         "success",
         "danger",
@@ -20,9 +22,10 @@ class Alert extends Component
      *
      * @return void
      */
-    public function __construct($type = "info")
+    public function __construct($type = "info", $dismissible = false)
     {
         $this->type = $type;
+        $this->dismissible = $dismissible;
     }
 
     public function validType()
