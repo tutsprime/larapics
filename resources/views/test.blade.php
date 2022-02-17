@@ -20,5 +20,10 @@
         
         <p class="mb-0">Data has been removed. {{ $component->link('Undo') }}</p>
     </x-alert>
+
+    <x-form action="/images" method="POST">
+        <input type="text" name="name">
+        <button type="submit">Submit</button>
+    </x-form>
 </body>
 </html>
