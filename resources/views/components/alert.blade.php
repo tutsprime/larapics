@@ -1,4 +1,4 @@
-<div {{ $attributes->class(['alert-dismissible fade show' => $dismissible])->merge(['class' => "alert alert-{$validType}", 'role' => $attributes->prepends('alert')]) }}>
+<div {{ $attributes->merge(['class' => $getClasses, 'role' => $attributes->prepends('alert')]) }}>
     @isset($title)
         <h4 class="alert-heading">{{ $title }}</h4>
     @endisset

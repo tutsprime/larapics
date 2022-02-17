@@ -18,6 +18,8 @@ class Alert extends Component
         "info"
     ];
 
+    protected $classes = ['alert'];
+
     /**
      * Create a new component instance.
      *
@@ -25,13 +27,17 @@ class Alert extends Component
      */
     public function __construct($type = "info", $dismissible = false)
     {
-        $this->type = $type;
+        $this->type = $this->validType($type);
+        $this->classes[] = "alert-{$this->type}";
+        if ($dismissible) {
+            $this->classes[] = "alert-dismissible fade show";
+        }
         $this->dismissible = $dismissible;
     }
 
-    public function validType()
+    protected function validType($type)
     {
-        return in_array($this->type, $this->types) ? $this->type : 'info';
+        return in_array($type, $this->types) ? $type : 'info';
     }
 
     public function link($text, $target = '#')
@@ -41,8 +47,14 @@ class Alert extends Component
 
     public function icon($url = null)
     {
+        $this->classes[] = 'd-flex align-items-center';
         $icon = $url ?? asset("icons/icon-{$this->type}.svg");
         return new HtmlString("<img class='me-2' src='{$icon}' />");
+    }
+
+    public function getClasses()
+    {
+        return join(" ", $this->classes);
     }
 
     /**
