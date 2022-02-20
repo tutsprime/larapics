@@ -15,7 +15,7 @@
                         </a>
                         <div class="photo-buttons">
                             <div>
-                                <a class="btn btn-sm btn-info me-2" href="{{ $image->route('edit') }}">Edit</a> |
+                                <a class="btn btn-sm btn-info me-2" href="{{ $image->route('edit') }}">Edit</a>
                                 <x-form action="{{ $image->route('destroy') }}" method="DELETE">
                                     <button class="btn btn-sm btn-danger" type="submit" onclick="return confirm('Are you sure?')">Delete</button>
                                 </x-form>
