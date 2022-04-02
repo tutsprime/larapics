@@ -5,19 +5,22 @@ namespace App\Http\Controllers;
 use App\Http\Requests\ImageRequest;
 use App\Models\Image;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
 
 class ImageController extends Controller
 {
-    public function index()
+    public function __construct()
     {
-        $images = Image::published()->latest()->paginate(15);
-
-        return view('image.index', compact('images'));
+        $this->middleware(['auth']);
+        
+        $this->authorizeResource(Image::class);
     }
 
-    public function show(Image $image)
+    public function index()
     {
-        return view('image.show', compact('image'));
+        $images = Image::visibleFor(request()->user())->latest()->paginate(15)->withQueryString();
+
+        return view('image.index', compact('images'));
     }
 
     public function create()
