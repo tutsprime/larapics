@@ -49,6 +49,11 @@ class User extends Authenticatable
         return $this->hasMany(Image::class);
     }
 
+    public function social()
+    {
+        return $this->hasOne(Social::class); // , "id_user", "_id");
+    }
+
     public function getImagesCount()
     {
         $imagesCount = $this->images()->published()->count();
