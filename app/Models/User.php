@@ -51,7 +51,7 @@ class User extends Authenticatable
 
     public function social()
     {
-        return $this->hasOne(Social::class); // , "id_user", "_id");
+        return $this->hasOne(Social::class)->withDefault(); // , "id_user", "_id");
     }
 
     public function getImagesCount()
@@ -60,3 +60,26 @@ class User extends Authenticatable
         return $imagesCount . ' ' . str()->plural('image', $imagesCount);
     }
 }
+/*
+# Assigning one to one relationship 
+## 1st way
+$user = User::first()
+$social = new Social
+$social->instagram = "https://instagram.com/test"
+$social->user_id = $user->id
+$social->save()
+
+## 2nd way
+$user = User::first()
+$social = new Social
+$social->instagram = "https://instagram.com/test2"
+$social->website = "https://mywebsite.test"
+$social->user()->associate($user)
+$social->save()
+
+## 3rd way
+$user = User::first()
+$social = new Social
+$social->instagram = "https://instagram.com/test3"
+$user->social()->save($social)
+*/
