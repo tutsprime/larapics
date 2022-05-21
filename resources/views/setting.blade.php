@@ -1,5 +1,6 @@
 <x-layout title="Setting">
     <div class="container py-4">
+        <x-flash-message />
         <x-form action="{{ route('settings.update') }}" method="PUT">
             <div class="row gx-5">
                 <div class="col-md-6">
