@@ -24,7 +24,10 @@ class UpdateSettingRequest extends FormRequest
     public function rules()
     {
         return [
-            'social.*' => 'nullable|url'
+            'social.*' => 'nullable|url',
+            'options.disable_comments' => 'boolean',
+            'options.moderate_comments' => 'boolean',
+            'options.email_notification.*' => 'nullable',
         ];
     }
 
