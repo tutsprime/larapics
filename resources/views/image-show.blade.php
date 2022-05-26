@@ -11,10 +11,10 @@
             </div>
             <div class="col-md-3">
                 <div class="d-flex align-items-center mb-3">
-                    <img src="https://www.gravatar.com/avatar/c1d58af78e2086e8348f0f3b70425b25?d=mp&amp;s=60"
+                    <img src="{{ $image->user->profileImageUrl() }}" width="60"
                         alt="Author" class="rounded-circle mr-3">
                     <div class="ms-3">
-                        <h5><a href="#" class="text-decoration-none">{{ $image->user->name }}</a></h5>
+                        <h5><a href="{{ $image->user->url() }}" class="text-decoration-none">{{ $image->user->name }}</a></h5>
                         <p class="text-muted mb-0">{{ $image->user->getImagesCount() }}</p>
                     </div>
                 </div>

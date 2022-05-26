@@ -66,6 +66,21 @@ class User extends Authenticatable
         return !!$this->cover_image;
     }
 
+    public function url()
+    {
+        return route('author.show', $this->username);
+    }
+
+    public function inlineProfile()
+    {
+        return collect([
+            $this->name,
+            trim(join("/", [$this->city, $this->country]), "/"),
+            "Member since " . $this->created_at->toFormattedDateString(),
+            $this->getImagesCount()
+        ])->filter()->implode(" • ");
+    }
+
     public function updateSettings($data)
     {
         $this->update($data['user']);
