@@ -1,41 +1,51 @@
 <x-layout title="Setting">
     <div class="container py-4">
         <x-flash-message />
-        <x-form action="{{ route('settings.update') }}" method="PUT">
+        <x-form action="{{ route('settings.update') }}" method="PUT" enctype="multipart/form-data">
             <div class="row gx-5">
                 <div class="col-md-6">
                     <fieldset>
                         <legend>Personal Data</legend>
                         <div class="mb-3">
                             <label class="form-label" for="username">Username</label>
-                            <input type="text" name="user[username]" id="username" class="form-control is-invalid">
+                            <input type="text" name="user[username]" id="username" class="form-control @error('user.username') is-invalid @enderror"
+                                value="{{ old('user.username', $user->username) }}"
+                            >
                             <div class="invalid-feedback">
                                 Please choose a username.
                             </div>
                         </div>
                         <div class="mb-3">
                             <label class="form-label" for="name">Full Name</label>
-                            <input type="text" name="user[name]" id="name" class="form-control">
+                            <input type="text" name="user[name]" id="name" class="form-control @error('user.name') is-invalid @enderror"
+                                value="{{ old('user.name', $user->name) }}"
+                            >
                         </div>
                         <div class="mb-3">
                             <label class="form-label" for="profile_image">Profile Image</label>
-                            <input type="file" name="user[profile_image]" id="profile_image" class="form-control">
+                            <input type="file" name="user[profile_image]" id="profile_image" class="form-control @error('user.profile_image') is-invalid @enderror"
+                                value="{{ old('user.profile_image', $user->profile_image) }}"
+                            >
                         </div>
                         <div class="mb-3">
-                            <img src="images/user-default.png" width="150" alt="">
+                            <img src="{{ $user->profileImageUrl() }}" width="150" alt="">
                         </div>
                         <div class="mb-3">
                             <label class="form-label" for="city">City</label>
-                            <input type="text" name="user[city]" id="city" class="form-control">
+                            <input type="text" name="user[city]" id="city" class="form-control @error('user.city') is-invalid @enderror"
+                                value="{{ old('user.city', $user->city) }}"
+                            >
                         </div>
                         <div class="mb-3">
                             <label class="form-label" for="country">Country</label>
-                            <input type="text" name="user[country]" id="country" class="form-control">
+                            <input type="text" name="user[country]" id="country" class="form-control @error('user.country') is-invalid @enderror"
+                                value="{{ old('user.country', $user->country) }}"
+                            >
                         </div>
                         <div class="mb-3">
                             <label class="form-label" for="bio">About me</label>
-                            <textarea name="user[bio]" id="biod" rows="3" class="form-control"
-                                placeholder="In a few words, tell us about yourself"></textarea>
+                            <textarea name="user[about_me]" id="biod" rows="3" class="form-control @error('user.about_me') is-invalid @enderror"
+                                placeholder="In a few words, tell us about yourself">{{ old('user.about_me', $user->about_me) }}</textarea>
                         </div>
                     </fieldset>
                     <fieldset class="mt-3">
@@ -67,7 +77,7 @@
                             <input type="file" name="user[cover_image]" id="cover_image" class="form-control">
                         </div>
                         <div class="mb-3">
-                            <img src="https://via.placeholder.com/600x250&text=Cover Image" class="img-fluid" alt="">
+                            <img src="{{ $user->hasCoverImage() ? $user->coverImageUrl() : 'https://via.placeholder.com/600x250&text=Cover Image' }}" class="img-fluid" alt="">
                         </div>
                     </fieldset>
                     <fieldset class="mt-3">
