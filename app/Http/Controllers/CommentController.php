@@ -21,6 +21,14 @@ class CommentController extends Controller
         return view("comments.index", compact('comments'));
     }
 
+    public function update(Comment $comment, Request $request)
+    {
+        $comment->approved = $request->approve;
+        $comment->update();
+
+        return back()->with('message', "Comment has been " . ($request->approved ? "approved" : "unapproved"));
+    }
+
     public function store(Image $image, CreateCommentRequest $request)
     {
         $image->comments()->create($request->getData());
