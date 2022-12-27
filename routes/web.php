@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ImageController;
 use App\Http\Controllers\ListImageController;
+use App\Http\Controllers\ReplyCommentController;
 use App\Http\Controllers\SettingController;
 use App\Http\Controllers\ShowAuthorController;
 use App\Http\Controllers\ShowImageController;
@@ -30,6 +31,8 @@ Route::put('/account/settings', [SettingController::class, 'update'])->name('set
 Route::get('/account/comments', [CommentController::class, 'index'])->name('comments.index');
 Route::put('/account/comments/{comment}', [CommentController::class, 'update'])->name('comments.update');
 Route::delete('/account/comments/{comment}', [CommentController::class, 'destroy'])->name('comments.destroy');
+Route::get('/account/comments/{comment}/reply', [ReplyCommentController::class, 'create'])->name('comments.reply.create');
+Route::post('/account/comments/{comment}/reply', [ReplyCommentController::class, 'store'])->name('comments.reply.store');
 
 Route::view('/test-blade', 'test');
 Auth::routes();

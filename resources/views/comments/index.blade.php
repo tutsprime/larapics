@@ -28,7 +28,7 @@
                                 <input type="hidden" name="approve" value="{{ $comment->approved ? 0 : 1 }}">
                                 <button type="submit" class="btn btn-sm btn-outline-success">{{$comment->approved ? "Unapprove" : "Approve"}}</button>     
                             </x-form>
-                            <a href="#" class="btn btn-sm btn-outline-primary">Reply</a>
+                            <a href="{{ route('comments.reply.create', $comment->id) }}" class="btn btn-sm btn-outline-primary">Reply</a>
                             <x-form method="DELETE" action="{{ route('comments.destroy', $comment->id) }}" style="display: inline">
                               <button type="submit" class="btn btn-sm btn-outline-danger" onclick="return confirm('Are you sure?')">Remove</a>
                             </x-form>
