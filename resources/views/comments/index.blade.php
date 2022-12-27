@@ -3,7 +3,7 @@
     <div class="container py-4">
         <h1>Comments</h1>
         <x-flash-message />
-        
+
         <table class="table mt-4">
             <thead>
                 <tr>
@@ -29,7 +29,9 @@
                                 <button type="submit" class="btn btn-sm btn-outline-success">{{$comment->approved ? "Unapprove" : "Approve"}}</button>     
                             </x-form>
                             <a href="#" class="btn btn-sm btn-outline-primary">Reply</a>
-                            <a href="#" class="btn btn-sm btn-outline-danger">Remove</a>
+                            <x-form method="DELETE" action="{{ route('comments.destroy', $comment->id) }}" style="display: inline">
+                              <button type="submit" class="btn btn-sm btn-outline-danger" onclick="return confirm('Are you sure?')">Remove</a>
+                            </x-form>
                         </td>
                     </tr>
                 @endforeach
