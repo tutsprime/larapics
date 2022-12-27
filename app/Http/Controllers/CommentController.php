@@ -17,6 +17,12 @@ class CommentController extends Controller
     {
         $image->comments()->create($request->getData());
 
-        return back()->with('message', "Your comment has been sent");
+        if ($image->user->setting->moderate_comments) {
+            $message = "Your comment is awaiting moderation. It will be visible after it has been approved";
+          } else {
+            $message = "Your comment has been sent";
+          }
+
+        return back()->with('message', $message);
     }
 }

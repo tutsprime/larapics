@@ -20,4 +20,9 @@ class Comment extends Model
     {
         return $this->belongsTo(User::class);
     }
+
+    public function scopeApproved($query)
+    {
+        return $query->where('approved', true);
+    }
 }

@@ -38,7 +38,8 @@ class DatabaseSeeder extends Seeder
         Image::find([1, 2])->each(function ($image) {
             User::all()->each(function ($user) use ($image) {
               $image->comments()->save(Comment::factory()->make([
-                'user_id' => $user->id
+                'user_id' => $user->id,
+                'approved' => rand(0, 1)
               ]));
             });
         });
