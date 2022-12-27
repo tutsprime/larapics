@@ -15,6 +15,8 @@ class ShowImageController extends Controller
      */
     public function __invoke(Image $image, Request $request)
     {
-        return view('image-show', compact('image'));
+        $comments = $image->comments()->with('user')->latest()->get();
+
+        return view('image-show', compact('image', 'comments'));
     }
 }
