@@ -15,8 +15,10 @@ class ShowImageController extends Controller
      */
     public function __invoke(Image $image, Request $request)
     {
-        $comments = $image->comments()->with('user')->approved()->latest()->get();
+        $disableComment = $image->user->setting->disable_comments;
 
-        return view('image-show', compact('image', 'comments'));
+        $comments = $disableComment ? [] : $image->comments()->with('user')->approved()->latest()->get();
+
+        return view('image-show', compact('image', 'comments', 'disableComment'));
     }
 }
