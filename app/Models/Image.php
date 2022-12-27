@@ -18,6 +18,11 @@ class Image extends Model
         return $this->belongsTo(User::class);
     }
 
+    public function comments()
+    {
+        return $this->hasMany(Comment::class);
+    }
+
     public function uploadDate()
     {
         return $this->created_at->diffForHumans();
