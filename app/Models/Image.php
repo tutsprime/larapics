@@ -41,6 +41,24 @@ class Image extends Model
         return new HtmlString("<ul>{$items}</ul>");
     }
 
+    public function syncTags($tagsString)
+    {
+        if (!$tagsString) return;
+
+        $tagIds = collect(explode(",", $tagsString))
+            ->filter()
+            ->map(function ($tag) {
+                $tagObj = Tag::firstOrCreate([
+                    'name' => trim($tag),
+                    'slug' => str($tag)->slug()
+                ]);
+
+                return $tagObj->id;
+            });
+
+        $this->tags()->sync($tagIds);
+    }
+
     public function uploadDate()
     {
         return $this->created_at->diffForHumans();

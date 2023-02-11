@@ -30,7 +30,8 @@ class ImageController extends Controller
 
     public function store(ImageRequest $request)
     {
-        Image::create($request->getData());
+        $image = Image::create($data = $request->getData());
+        $image->syncTags($data['tags']);
         return to_route('images.index')->with('message', "Image has been uploaded successfully");
     }
     

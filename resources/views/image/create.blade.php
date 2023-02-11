@@ -25,6 +25,16 @@
                                     <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror
                             </div>
+                            <div class="mb-4">
+                                <label class="form-label" for="tags">Tags</label>
+                                <input class="form-control @error('tags') is-invalid @enderror" type="text" name="tags" id="tags" value="{{ old('tags') }}">
+                                @error('tags')
+                                    <div class="invalid-feedback">{{ $message }}</div>
+                                @enderror
+                                <div class="form-text">
+                                    Separate your tags with comma
+                                </div>
+                            </div>
                         
                             <div class="mb-3">
                                 <button type="submit" class="btn btn-primary">Upload</button>
