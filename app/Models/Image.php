@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Enums\Role;
+use Illuminate\Support\HtmlString;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -21,6 +22,23 @@ class Image extends Model
     public function comments()
     {
         return $this->hasMany(Comment::class);
+    }
+
+    public function tags()
+    {
+        return $this->belongsToMany(Tag::class);
+    }
+
+    public function tagLinks()
+    {
+        $items = $this->tags()
+            ->pluck('name', 'slug')
+            ->map(function ($name, $slug) {
+                return "<li><a href=" . route('images.tag', $slug) . ">{$name}</a></li>";
+            })
+            ->join("");
+
+        return new HtmlString("<ul>{$items}</ul>");
     }
 
     public function uploadDate()

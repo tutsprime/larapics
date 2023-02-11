@@ -64,15 +64,9 @@
                     </table>
                 </div>
 
-                {{-- <div class="tagcloud mt-3">
-                    <ul>
-                        <li><a href="#">Nature</a></li>
-                        <li><a href="#">Mountain</a></li>
-                        <li><a href="#">Blue</a></li>
-                        <li><a href="#">Forest</a></li>
-                        <li><a href="#">Animal</a></li>
-                    </ul>
-                </div> --}}
+                <div class="tagcloud mt-3">
+                    {{ $image->tagLinks() }}
+                </div>
             </div>
         </div>
     </div>

@@ -2,10 +2,11 @@
 
 namespace Database\Seeders;
 
-use App\Models\Comment;
+use App\Models\Tag;
+use App\Models\User;
 use App\Models\Image;
 use App\Models\Social;
-use App\Models\User;
+use App\Models\Comment;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
@@ -42,6 +43,14 @@ class DatabaseSeeder extends Seeder
                 'approved' => rand(0, 1)
               ]));
             });
+        });
+        
+        $tags = Tag::factory(10)->create();
+        
+        Image::all()->each(function ($image) use ($tags) {
+            $image->tags()->attach(
+                $tags->pluck('id')->random(rand(2, 5))
+            );
         });
     }
 }
