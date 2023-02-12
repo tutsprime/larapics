@@ -24,7 +24,7 @@ use App\Http\Controllers\ShowImageController;
 Route::get('/', ListImageController::class)->name('images.all');
 Route::get('/images/{image}', ShowImageController::class)->name('images.show');
 Route::post('/images/{image}/comment', [CommentController::class, 'store'])->name('comments.store');
-Route::get('/tags/{tag}', ListImageController::class)->name('images.tag');
+Route::get('/tags/{tag:slug}', ListImageController::class)->name('images.tag');
 Route::get('/@{user:username}', ShowAuthorController::class)->name('author.show');
 Route::resource('/account/images', ImageController::class)->except('show');
 Route::get('/account/settings', [SettingController::class, 'edit'])->name('settings.edit');
