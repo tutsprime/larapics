@@ -42,7 +42,8 @@ class ImageController extends Controller
 
     public function update(Image $image, ImageRequest $request)
     {
-        $image->update($request->getData());
+        $image->update($data = $request->getData());
+        $image->syncTags($data['tags']);
         return to_route('images.index')->with('message', "Image has been updated successfully");
     }
     

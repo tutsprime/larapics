@@ -29,6 +29,11 @@ class Image extends Model
         return $this->belongsToMany(Tag::class);
     }
 
+    public function tagsString()
+    {
+        return $this->tags()->pluck('name')->join(", ");
+    }
+
     public function tagLinks()
     {
         $items = $this->tags()
@@ -134,6 +139,15 @@ class Image extends Model
         
         static::deleted(function ($image) {
             Storage::delete($image->file);
+        });
+        
+        static::deleting(function ($image) {
+            $image->tags->each(function ($tag) {
+                $imagesCount = $tag->images()->wherePivot('image_id', '!=', $tag->pivot->image_id)->count();
+                if (!$imagesCount) {
+                    $tag->delete();
+                }
+            });
         });
     }
 }

@@ -17,6 +17,13 @@
                                     <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror
                             </div>
+                            <div class="mb-4">
+                                <label class="form-label" for="tags">Tags</label>
+                                <input class="form-control @error('tags') is-invalid @enderror" type="text" name="tags" id="tags" value="{{ old('tags', $image->tagsString()) }}">
+                                @error('tags')
+                                  <div class="invalid-feedback">{{ $message }}</div>
+                                @enderror
+                            </div>
                         
                             <div class="mb-3">
                                 <button type="submit" class="btn btn-primary">Update</button>
