@@ -6,7 +6,7 @@
                     <img src="{{ $image->fileUrl() }}" title="{{ $image->title }}" class="img-fluid" />
                 </div>
 
-                {{-- @include('image._related-images') --}}
+                @include('image._related-images')
                 @if ($disableComment)
                     <p class="text-muted mt-3">Comments disabled by author</p>
                 @else

@@ -19,6 +19,8 @@ class ShowImageController extends Controller
 
         $comments = $disableComment ? [] : $image->comments()->with('user')->approved()->latest()->get();
 
-        return view('image-show', compact('image', 'comments', 'disableComment'));
+        $relatedImages = $image->relatedImages();
+
+        return view('image-show', compact('image', 'comments', 'disableComment', 'relatedImages'));
     }
 }

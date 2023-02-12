@@ -29,6 +29,19 @@ class Image extends Model
         return $this->belongsToMany(Tag::class);
     }
 
+    public function relatedImages($limit = 3)
+    {
+        $tagIds = $this->load('tags')->tags->pluck('id');
+
+        return Image::where('id', '!=', $this->id)
+            ->whereHas('tags', function ($query) use ($tagIds) {
+                $query->whereIn('tag_id', $tagIds);
+            })
+            ->inRandomOrder()
+            ->take($limit)
+            ->get();
+    }
+
     public function tagsString()
     {
         return $this->tags()->pluck('name')->join(", ");
