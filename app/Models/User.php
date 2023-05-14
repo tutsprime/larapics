@@ -51,6 +51,11 @@ class User extends Authenticatable
         'role' => Role::class
     ];
 
+    public function comments()
+    {
+        return $this->hasMany(Comment::class);
+    }
+
     public function profileImageUrl()
     {
         return Storage::url($this->profile_image ? $this->profile_image : "users/user-default.png");
