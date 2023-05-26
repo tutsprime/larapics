@@ -1,6 +1,7 @@
 <x-layout title="Manage comments">
     <div class="container py-4">
         <h1>Comments</h1>
+        <x-flash-message />
         <table class="table mt-4">
             <thead>
                 <tr>
@@ -21,7 +22,12 @@
                             <img src="{{ $comment->image->fileUrl() }}" width="100" />
                         </td>
                         <td>
-                            <a href="#" class="btn btn-sm btn-outline-success">Approve</a>
+                            <x-form method="PUT" action="{{ route('comments.update', $comment->id) }}" style="display: inline">
+                                <input type="hidden" name="approved" value="{{ $comment->approved ? 0 : 1}}">
+                                <button type="submit" class="btn btn-sm btn-outline-success">
+                                    {{ $comment->approved ? "Unapprove" : "Approve" }}
+                                </button>
+                            </x-form>
                             <a href="#" class="btn btn-sm btn-outline-primary">Reply</a>
                             <a href="#" class="btn btn-sm btn-outline-danger">Remove</a>
                         </td>
