@@ -49,6 +49,7 @@
                         @endif
                     @else
                         <li class="nav-item"><a href="{{ route('images.index') }}" class="nav-link {{ request()->is('account/images*') ? 'active' : '' }}">Images</a></li>
+                        <li class="nav-item"><a href="{{ route('comments.index') }}" class="nav-link {{ request()->is('account/comments*') ? 'active' : '' }}">Comments</a></li>
                         <li class="nav-item"><a href="#" class="nav-link {{ request()->is('account/favorites*') ? 'active' : '' }}">Favorites</a></li>
                         <li class="nav-item dropdown">
                             <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>

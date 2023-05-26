@@ -26,4 +26,11 @@ class Comment extends Model
     {
         return $query->where('approved', true);
     }
+
+    public function scopeForUser(Builder $query, User $user)
+    {
+        $imageIds = Image::whereBelongsTo($user)->pluck('id')->all();
+        
+        return $query->whereIn("image_id", $imageIds);
+    }
 }
