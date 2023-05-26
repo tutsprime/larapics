@@ -7,7 +7,13 @@
                 </div>
 
                 {{-- @include('image._related-images') --}}
-                @include('_comments')
+                @auth
+                    @include('_comments')
+                @else
+                    <p class="text-muted mt-3">
+                        <a href="{{ route('login') }}">Sign in</a> to leave a comment.
+                    </p>
+                @endauth
             </div>
             <div class="col-md-3">
                 <div class="d-flex align-items-center mb-3">
