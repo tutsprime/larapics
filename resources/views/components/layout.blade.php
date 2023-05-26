@@ -91,6 +91,13 @@
     <script async src="https://cdn.jsdelivr.net/npm/masonry-layout@4.2.2/dist/masonry.pkgd.min.js"
         integrity="sha384-GNFwBvfVxBkLMJpYMOABq3c+d3KnQxudP/mGPkzpZSTYykLBNsZEnG2D9G/X/+7D"
         crossorigin="anonymous"></script>
+
+    <script>
+        Promise.all(Array.from(document.images).filter(img => !img.complete).map(img => new Promise(resolve => { img.onload = img.onerror = resolve; }))).then(() => {
+                var msnry = new Masonry('.grid');
+            msnry.layout();
+        });
+    </script>
 </body>
 
 </html>
