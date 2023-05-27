@@ -99,6 +99,7 @@
             msnry.layout();
         });
     </script>
+    @stack('scripts')
 </body>
 
 </html>

@@ -29,7 +29,9 @@ class CommentController extends Controller
         $comment->approved = $request->approved == 1;
         $comment->update();
 
-        return back()->with('message', "Comment has been " . ($comment->approved ? "approved" : "unapproved"));
+        return back()
+            ->with('updated', $comment->id)
+            ->with('message', "Comment has been " . ($comment->approved ? "approved" : "unapproved"));
     }
 
     public function store(Image $image, CreateCommentRequest $request)
