@@ -25,13 +25,18 @@
                             <img src="{{ $comment->image->fileUrl() }}" width="100" />
                         </td>
                         <td>
-                            <x-form method="PUT" action="{{ route('comments.update', $comment->id) }}" style="display: inline">
-                                <input type="hidden" name="approved" value="{{ $comment->approved ? 0 : 1}}">
-                                <button type="submit" class="btn btn-sm btn-outline-success">
-                                    {{ $comment->approved ? "Unapprove" : "Approve" }}
-                                </button>
-                            </x-form>
-                            <a href="#" class="btn btn-sm btn-outline-primary">Reply</a>
+                            @if(auth()->id() === $comment->user_id)
+                                <a href="#" disabled class="btn btn-sm btn-outline-success disabled">Approve</a>
+                                <a href="#" disabled class="btn btn-sm btn-outline-primary disabled">Reply</a>
+                            @else
+                                <x-form method="PUT" action="{{ route('comments.update', $comment->id) }}" style="display: inline">
+                                    <input type="hidden" name="approved" value="{{ $comment->approved ? 0 : 1}}">
+                                    <button type="submit" class="btn btn-sm btn-outline-success">
+                                        {{ $comment->approved ? "Unapprove" : "Approve" }}
+                                    </button>
+                                </x-form>
+                                <a href="{{ route('comments.reply.create', $comment->id) }}" class="btn btn-sm btn-outline-primary">Reply</a>
+                            @endif
                             <x-form method="DELETE" action="{{ route('comments.destroy', $comment->id) }}" style="display: inline" onsubmit="return confirm('Are you sure?')">
                                 <button type="submit" class="btn btn-sm btn-outline-danger">Remove</button>
                             </x-form>
