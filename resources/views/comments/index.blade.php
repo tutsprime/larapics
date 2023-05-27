@@ -32,7 +32,9 @@
                                 </button>
                             </x-form>
                             <a href="#" class="btn btn-sm btn-outline-primary">Reply</a>
-                            <a href="#" class="btn btn-sm btn-outline-danger">Remove</a>
+                            <x-form method="DELETE" action="{{ route('comments.destroy', $comment->id) }}" style="display: inline" onsubmit="return confirm('Are you sure?')">
+                                <button type="submit" class="btn btn-sm btn-outline-danger">Remove</button>
+                            </x-form>
                         </td>
                     </tr>
                 @endforeach

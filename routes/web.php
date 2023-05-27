@@ -27,6 +27,7 @@ Route::get('/@{user:username}', ShowAuthorController::class)->name('author.show'
 Route::resource('/account/images', ImageController::class)->except('show');
 Route::get('/account/comments', [CommentController::class, 'index'])->name('comments.index');
 Route::put('/account/comments/{comment}', [CommentController::class, 'update'])->name('comments.update');
+Route::delete('/account/comments/{comment}', [CommentController::class, 'destroy'])->name('comments.destroy');
 Route::get('/account/settings', [SettingController::class, 'edit'])->name('settings.edit');
 Route::put('/account/settings', [SettingController::class, 'update'])->name('settings.update');
 

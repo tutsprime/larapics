@@ -34,6 +34,13 @@ class CommentController extends Controller
             ->with('message', "Comment has been " . ($comment->approved ? "approved" : "unapproved"));
     }
 
+    public function destroy(Comment $comment)
+    {
+        $comment->delete();
+
+        return back()->with('message', "Comment has been removed.");
+    }
+
     public function store(Image $image, CreateCommentRequest $request)
     {
         $moderateComments = $this->moderateComments($image);
