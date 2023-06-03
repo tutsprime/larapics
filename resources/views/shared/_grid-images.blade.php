@@ -1,4 +1,4 @@
-<div class="row" data-masonry='{"percentPosition": true }'>
+<div class="row grid" data-masonry='{"percentPosition": true }'>
     @foreach ($images as $image)
         <div class="col-sm-6 col-lg-4 mb-4">
             <div class="card">
